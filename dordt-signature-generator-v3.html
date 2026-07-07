@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dordt University Email Signature Generator</title>
+<style>
+  :root{
+    --teal-dark:#1c4f4a;
+    --teal:#2c6e64;
+    --ink:#1a1a1a;
+    --paper:#ffffff;
+    --bg:#f2f1ed;
+    --line:#dcdad3;
+    --muted:#6b6b66;
+    --focus:#2c6e64;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+  }
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:32px 20px 60px;
+  }
+  header{
+    margin-bottom:28px;
+  }
+  header .eyebrow{
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--teal);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  header h1{
+    margin:0 0 6px;
+    font-size:28px;
+    letter-spacing:-0.01em;
+    color:var(--teal-dark);
+  }
+  header p{
+    margin:0;
+    color:var(--muted);
+    font-size:14.5px;
+    max-width:60ch;
+    line-height:1.5;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    align-items:start;
+  }
+  @media (max-width:760px){
+    .grid{grid-template-columns:1fr;}
+  }
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:24px;
+  }
+  .card h2{
+    margin:0 0 18px;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--teal-dark);
+    font-weight:700;
+  }
+  .field{
+    margin-bottom:16px;
+  }
+  .field label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    color:#333;
+    margin-bottom:5px;
+  }
+  .field .hint{
+    font-weight:400;
+    color:var(--muted);
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .field input{
+    width:100%;
+    padding:9px 10px;
+    font-size:14px;
+    border:1px solid #c9c7c0;
+    border-radius:6px;
+    font-family:inherit;
+    color:var(--ink);
+    background:#fdfdfc;
+  }
+  .field input:focus{
+    outline:none;
+    border-color:var(--focus);
+    box-shadow:0 0 0 3px rgba(44,110,100,0.15);
+  }
+  .row2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .email-row{
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .email-row input{flex:1;}
+  .auto-toggle{
+    font-size:11.5px;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    gap:5px;
+    white-space:nowrap;
+  }
+  .preview-card{
+    position:sticky;
+    top:20px;
+  }
+  .preview-surface{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:20px;
+    background:#fff;
+    min-height:110px;
+  }
+  .actions{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+    flex-wrap:wrap;
+  }
+  button{
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    border-radius:7px;
+    padding:10px 16px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:background .15s ease, transform .05s ease;
+  }
+  button:active{transform:translateY(1px);}
+  .btn-primary{
+    background:var(--teal-dark);
+    color:#fff;
+  }
+  .btn-primary:hover{background:var(--teal);}
+  .btn-secondary{
+    background:#fff;
+    color:var(--teal-dark);
+    border-color:var(--teal-dark);
+  }
+  .btn-secondary:hover{background:#eef4f2;}
+  .status{
+    font-size:12.5px;
+    color:var(--teal-dark);
+    font-weight:600;
+    margin-top:10px;
+    height:16px;
+  }
+  .instructions{
+    margin-top:10px;
+    font-size:12.5px;
+    color:var(--muted);
+    line-height:1.5;
+  }
+  .required-note{
+    font-size:11.5px;
+    color:var(--muted);
+    margin-top:-8px;
+    margin-bottom:18px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Dordt University &middot; Marketing &amp; Communications</div>
+    <h1>Email Signature Generator</h1>
+    <p>Fill in your information below. Your signature will build itself in the preview &mdash; then copy it straight into your email client. No HTML, no formatting, no guesswork.</p>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Your Information</h2>
+      <div class="required-note">Fields marked * are required</div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="firstName">First name *</label>
+          <input type="text" id="firstName" placeholder="Firstname">
+        </div>
+        <div class="field">
+          <label for="lastName">Last name *</label>
+          <input type="text" id="lastName" placeholder="Lastname">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="credentials">Credentials <span class="hint">(optional &mdash; e.g. Ph.D., Ed.D.)</span></label>
+        <input type="text" id="credentials" placeholder="e.g. Ph.D.">
+      </div>
+
+      <div class="field">
+        <label for="jobTitle">Job title *</label>
+        <input type="text" id="jobTitle" placeholder="Job Title">
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone number</label>
+        <input type="text" id="phone" placeholder="712.722.6000">
+      </div>
+
+      <div class="field">
+        <label for="email">Email address</label>
+        <div class="email-row">
+          <input type="text" id="email" placeholder="first.last@dordt.edu">
+        </div>
+        <div class="auto-toggle" style="margin-top:6px;">
+          <input type="checkbox" id="autoEmail" checked style="width:auto;">
+          <label for="autoEmail" style="margin:0;font-weight:400;">Auto-generate from name (first.last@dordt.edu)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card preview-card">
+      <h2>Live Preview</h2>
+      <div class="preview-surface" id="previewSurface"></div>
+      <div class="actions">
+        <button class="btn-primary" id="copySignature">Copy Signature</button>
+        <button class="btn-secondary" id="copyHtml">Copy HTML Code</button>
+      </div>
+      <div class="status" id="statusMsg"></div>
+      <div class="instructions">
+        <strong>Copy Signature</strong> pastes directly into Outlook, Gmail, or your intranet signature field with formatting intact.<br>
+        <strong>Copy HTML Code</strong> gives you the raw source, for developers embedding this in a webpage or CMS block.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const fields = ['firstName','lastName','credentials','jobTitle','phone','email'];
+const els = {};
+fields.forEach(id => els[id] = document.getElementById(id));
+const autoEmailBox = document.getElementById('autoEmail');
+const previewSurface = document.getElementById('previewSurface');
+const statusMsg = document.getElementById('statusMsg');
+
+const LOGO_URL = "https://www.dordt.edu/general-uploads/email-assets/DU-Email-Signature/C1-600x600.png";
+
+function slug(str){
+  return str.trim().toLowerCase().replace(/[^a-z0-9]/g,'');
+}
+
+function updateAutoEmail(){
+  if(autoEmailBox.checked){
+    const f = slug(els.firstName.value);
+    const l = slug(els.lastName.value);
+    els.email.value = (f && l) ? `${f}.${l}@dordt.edu` : '';
+    els.email.disabled = true;
+  } else {
+    els.email.disabled = false;
+  }
+}
+
+function buildSignatureHtml(){
+  const first = els.firstName.value.trim() || 'Firstname';
+  const last = els.lastName.value.trim() || 'Lastname';
+  const creds = els.credentials.value.trim();
+  const title = els.jobTitle.value.trim() || 'Job Title';
+  const phone = els.phone.value.trim();
+  const email = els.email.value.trim() || 'first.last@dordt.edu';
+
+  const nameLine = creds ? `${first} ${last}, ${creds}` : `${first} ${last}`;
+
+  const contactParts = [];
+  if(phone) contactParts.push(phone);
+  contactParts.push(`<a href="mailto:${email}" style="color:#000000 !important;text-decoration:none !important;">${email}</a>`);
+  contactParts.push('dordt.edu');
+  const contactLine = contactParts.map((p,i) => {
+    if(i === 0) return p;
+    return `<span style="color:#cccccc;"> | </span>${p}`;
+  }).join('');
+
+  return `<table cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;font-family:Arial,Aptos,Calibri,sans-serif;font-size:12pt;line-height:1.15;">
+  <tbody>
+    <tr>
+      <td valign="middle" style="padding-right:12px;">
+        <img src="${LOGO_URL}" width="80" height="80" alt="Dordt University" style="display:block;border:0;">
+      </td>
+      <td width="1px" valign="middle" style="width:1px;background-color:#000000;font-size:0;line-height:0;">&nbsp;</td>
+      <td width="12" style="font-size:0;line-height:0;">&nbsp;</td>
+      <td valign="middle" style="padding:0;">
+        <p style="margin:0 0 2px 0;padding:0;font-size:14pt;line-height:1.2;font-weight:bold;color:#000000;">${nameLine}</p>
+        <p style="margin:0 0 2px 0;padding:0;font-size:12pt;line-height:1.2;font-weight:normal;color:#000000;">${title}</p>
+        <p style="margin:0 0 4px 0;padding:0;font-size:12pt;line-height:1.2;font-weight:bold;color:#000000;">Dordt University</p>
+        <p style="margin:0;padding:0;font-size:12pt;line-height:1.2;color:#000000;">${contactLine}</p>
+      </td>
+    </tr>
+  </tbody>
+</table>`;
+}
+
+function render(){
+  updateAutoEmail();
+  previewSurface.innerHTML = buildSignatureHtml();
+}
+
+fields.forEach(id => els[id].addEventListener('input', render));
+autoEmailBox.addEventListener('change', render);
+
+function flashStatus(msg){
+  statusMsg.textContent = msg;
+  setTimeout(() => { statusMsg.textContent = ''; }, 2500);
+}
+
+document.getElementById('copySignature').addEventListener('click', async () => {
+  const html = buildSignatureHtml();
+  try{
+    const blobHtml = new Blob([html], {type:'text/html'});
+    const blobText = new Blob([previewSurface.innerText], {type:'text/plain'});
+    await navigator.clipboard.write([
+      new ClipboardItem({'text/html': blobHtml, 'text/plain': blobText})
+    ]);
+    flashStatus('Signature copied! Paste into your email client.');
+  } catch(err){
+    // Fallback: select the rendered node and use execCommand
+    const range = document.createRange();
+    range.selectNodeContents(previewSurface);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    const ok = document.execCommand('copy');
+    sel.removeAllRanges();
+    flashStatus(ok ? 'Signature copied! Paste into your email client.' : 'Copy failed \u2014 try selecting the preview manually.');
+  }
+});
+
+document.getElementById('copyHtml').addEventListener('click', async () => {
+  const html = buildSignatureHtml();
+  try{
+    await navigator.clipboard.writeText(html);
+    flashStatus('HTML source copied to clipboard.');
+  } catch(err){
+    flashStatus('Copy failed \u2014 please copy manually.');
+  }
+});
+
+render();
+
+// Report height to parent window, if embedded in an iframe
+function reportHeight(){
+  const height = document.body.scrollHeight;
+  window.parent.postMessage({ type: 'dordt-sig-gen-height', height }, '*');
+}
+window.addEventListener('load', reportHeight);
+window.addEventListener('resize', reportHeight);
+new MutationObserver(reportHeight).observe(document.body, {childList:true, subtree:true, attributes:true});
+
+</script>
+</body>
+</html>
