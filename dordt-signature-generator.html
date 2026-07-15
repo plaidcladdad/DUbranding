@@ -288,25 +288,24 @@ function buildSignatureHtml(){
   const contactParts = [];
   if(phone) contactParts.push(phone);
   contactParts.push(`<a href="mailto:${email}" style="color:#000000 !important;text-decoration:none !important;">${email}</a>`);
-  contactParts.push('dordt.edu');
+  contactParts.push(`<a href="https://www.dordt.edu?utm_source=email_signature&utm_medium=email&utm_campaign=signature" style="color:#000000 !important;text-decoration:none !important;">dordt.edu</a>`);
   const contactLine = contactParts.map((p,i) => {
     if(i === 0) return p;
     return `<span style="color:#cccccc;"> | </span>${p}`;
   }).join('');
 
-  return `<table cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;font-family:Arial,Aptos,Calibri,sans-serif;font-size:12px;line-height:1.15;">
+  return `<table cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;font-family:Arial,Aptos,Calibri,sans-serif;font-size:12pt;line-height:1.15;">
   <tbody>
     <tr>
-      <td valign="middle" style="padding-right:12px;">
+      <td valign="middle" style="padding:0 12px 0 0;border-right:1px solid #000000;mso-border-right-alt:solid #000000 .75pt;">
         <img src="${LOGO_URL}" width="80" height="80" alt="Dordt University" style="display:block;border:0;">
       </td>
-      <td width="1px" valign="middle" style="width:1px;background-color:#000000;font-size:0;line-height:0;">&nbsp;</td>
       <td width="12" style="font-size:0;line-height:0;">&nbsp;</td>
       <td valign="middle" style="padding:0;">
-        <p style="margin:0 0 2px 0;padding:0;font-size:14px;line-height:1.2;font-weight:bold;color:#000000;">${nameLine}</p>
-        <p style="margin:0 0 2px 0;padding:0;font-size:12px;line-height:1.2;font-weight:normal;color:#000000;">${title}</p>
-        <p style="margin:0 0 4px 0;padding:0;font-size:12px;line-height:1.2;font-weight:bold;color:#000000;">Dordt University</p>
-        <p style="margin:0;padding:0;font-size:12px;line-height:1.2;color:#000000;">${contactLine}</p>
+        <p style="margin:0 0 2px 0;padding:0;font-size:14pt;line-height:1.2;font-weight:bold;color:#000000;">${nameLine}</p>
+        <p style="margin:0 0 2px 0;padding:0;font-size:12pt;line-height:1.2;font-weight:normal;color:#000000;">${title}</p>
+        <p style="margin:0 0 4px 0;padding:0;font-size:12pt;line-height:1.2;font-weight:bold;color:#000000;">Dordt University</p>
+        <p style="margin:0;padding:0;font-size:12pt;line-height:1.2;color:#000000;">${contactLine}</p>
       </td>
     </tr>
   </tbody>
